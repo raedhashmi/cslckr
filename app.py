@@ -1,6 +1,5 @@
 import os
 import shutil
-import webview
 import subprocess
 import win32com.client
 from flask import Flask, send_file, request, redirect, url_for
@@ -49,18 +48,9 @@ def success():
 def failure():
     return send_file('templates/failure.html')
 
-@app.route('/closeApp', methods=['GET'])
-def close_app():
-    locker.destroy()
-    return 'Success', 200
-
 @app.route('/resources/<path>')
 def resources(path):
     return send_file(os.path.join('templates', path))
 
 if __name__ == "__main__":
-    locker = webview.create_window("Computer Safety Locker", app, frameless=True, resizable=False, fullscreen=True, draggable=False, zoomable=False, http_port=3000)
-    create_shortcut()
-    locker.set_window_closable = False
-
-    webview.start()
+    app.run(debug=True)
