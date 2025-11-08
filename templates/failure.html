@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+    <title>Failure</title>
+    <style>
+        body {
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .message {
+            margin-top: -70px;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 47.4%;
+            border: 8px solid transparent;
+            border-radius: 50%;
+            border-top: 8px solid #cc7400;
+            width: 70px;
+            height: 70px;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        Incorrect password or timeout. Shutting down...
+        <div class="loader"></div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+    <title>Safety Lock</title>
+    <style>
+        body {
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .time {
+            position: absolute;
+            top: 30px;
+            font-size: 26px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #1f1f1f;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="password"] {
+            border: none;
+            border-bottom: 2px solid #cc6300;
+            background: transparent;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            padding: 10px;
+        }
+
+        input[type="submit"] {
+            background: #cc7400;
+            color: #ffffff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ac6100;
+        }
+
+        input[type="password"]:focus {
+            outline: none;
+            border-bottom: 2px solid #cc7400;
+        }
+
+        ::placeholder {
+            color: #666666;
+        }
+    </style>
+    <script>
+        function verifyPassword() {
+            var password = document.getElementById('password').value;
+            if (password == 'nexus') {
+                window.location.href = "/success";
+            } else {
+                window.location.href = "/failure";
+            }
+        }
+
+        var time = 10;
+        var countdown = setInterval(function() {
+            time--;
+            document.querySelector('.time').textContent = time;
+            if (time <= 0) {
+                clearInterval(countdown);
+                window.location.href = "/failure";
+            }
+        }, 1000);
+    </script>
+</head>
+<body>
+    <p class="time">10</p>
+    <form action="/" method="post" onsubmit="event.preventDefault(); verifyPassword();">
+        <input type="password" id="password" name="password" placeholder="Enter password" required autofocus>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
