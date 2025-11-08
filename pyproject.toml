@@ -1,7 +1,7 @@
 [project]
 name = "cslckr"
 version = "0.1.0"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 description = "A small cslckr web client."
 authors = [
     { name = "raedhashmi", email = "raedhashmi15@gmail.com" }
