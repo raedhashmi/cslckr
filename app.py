@@ -48,9 +48,5 @@ def success():
 def failure():
     return send_file('templates/failure.html')
 
-@app.route('/resources/<path>')
-def resources(path):
-    return send_file(os.path.join('templates', path))
-
 if __name__ == "__main__":
     app.run(debug=True)
