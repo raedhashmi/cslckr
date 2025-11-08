@@ -1,4 +1,3 @@
-pyinstaller
 pywebview
 flask
 pywin32
