@@ -8,7 +8,7 @@ from flask import Flask, send_file, request, redirect, url_for
 app = Flask(__name__)
 
 def create_shortcut():
-    source_file = __file__.replace("cslckr.py", "cslckr.exe")
+    source_file = __file__
     destination_location = os.path.join(os.path.expanduser("~"), "AppData")
     startup_shortcut_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "Startup", "Computer Safety Locker.lnk")
     programs_shortcut_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "Computer Safety Locker.lnk")
