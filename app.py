@@ -2,7 +2,7 @@ import os
 import shutil
 import subprocess
 import win32com.client
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, send_file, request, redirect, url_for
  
 app = Flask(__name__)
 
@@ -38,15 +38,19 @@ def home():
             return redirect(url_for('success'))
         else:
             return redirect(url_for('failure'))
-    return render_template('index.html')
+    return send_file('templates/index.html')
 
 @app.route('/success')
 def success():
-    return render_template('success.html')
+    return send_file('templates/success.html')
 
 @app.route('/failure')
 def failure():
-    return render_template('failure.html')
+    return send_file('templates/failure.html')
+
+@app.route('/resources/<path>')
+def resources(path):
+    return send_file(os.path.join('templates', path))
 
 if __name__ == "__main__":
     app.run(debug=True)
