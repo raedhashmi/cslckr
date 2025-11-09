@@ -42,6 +42,7 @@ def success():
 
 @app.route('/failure')
 def failure():
+    shutdown()
     return send_file('templates/failure.html')
 
 @app.route('/resources/<path>')
@@ -49,4 +50,5 @@ def resources(path):
     return send_file(os.path.join('templates', path))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    create_shortcut()
+    app.run(host='localhost', port=8004, debug=True)
