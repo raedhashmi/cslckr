@@ -1,8 +1,10 @@
 import os
 import requests
+from flask_cors import CORS
 from flask import Flask, send_file, request, redirect, url_for
  
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 messages = []
 
 @app.route('/', methods=['GET', 'POST'])
@@ -18,11 +20,13 @@ def home():
 
 @app.route('/success')
 def success():
+    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'exit', 'data': {'none': 'none'}})
     return send_file('templates/success.html')
 
 @app.route('/failure')
 def failure():
     requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'shutdown', 'data': {'none': 'none'}})
+    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'exit', 'data': {'none': 'none'}})
     return send_file('templates/failure.html')
 
 @app.route('/resources/<path>')
@@ -32,10 +36,13 @@ def resources(path):
 @app.route('/messages', methods=['POST', 'GET'])
 def handle_messages():
     if request.method == 'POST':
+        messages.clear()
         message = request.get_json()
         messages.append(message)
+        print('Recieved message: ', message)
         return {'status': 'success'}
     else:
+        print('Sent message: ', messages)
         return messages
         messages.clear()
 
