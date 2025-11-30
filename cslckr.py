@@ -7,6 +7,8 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)
 messages = []
 
+requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'updatewbcl'})
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'create_shortcut'})
@@ -36,7 +38,6 @@ def resources(path):
 @app.route('/messages', methods=['POST', 'GET'])
 def handle_messages():
     if request.method == 'POST':
-        messages.clear()
         message = request.get_json()
         messages.append(message)
         print('Recieved message: ', message)
