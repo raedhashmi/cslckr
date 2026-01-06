@@ -4,10 +4,8 @@ import uuid
 import requests
 from time import time
 from flask_cors import CORS
-from dotenv import load_dotenv
 from flask import Flask, send_file, request, redirect, url_for, jsonify
- 
-load_dotenv()
+
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
@@ -124,8 +122,8 @@ def handle_messages():
             username = creds.get('username')
             password = creds.get('password')
 
-            valid_username = os.getenv('USERNAME')
-            password_file = os.getenv('PASSWORD')
+            valid_username = 'mngr'
+            password_file = '/root/.config/code-server/config.yaml'
 
             with open(password_file, 'r') as f:
                 for i, line in enumerate(f):
@@ -179,4 +177,4 @@ def handle_messages():
         return jsonify(out)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8004, debug=True)
+    app.run(host='0.0.0.0', port=8003, debug=True)
