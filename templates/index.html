@@ -5,33 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="resources/styles.css">
-    <title>Safety Lock</title>
-    <script>
-        function verifyPassword() {
-            var password = document.getElementById('password').value;
-            if (password == 'nexus') {
-                window.location.href = "/success";
-            } else {
-                window.location.href = "/failure";
-            }
-        }
-
-        var time = Math.floor(Math.random() * (60 - 20 + 1)) + 20;
-        var countdown = setInterval(function() {
-            time--;
-            document.querySelector('.time').textContent = time;
-            if (time <= 0) {
-                clearInterval(countdown);
-                window.location.href = "/failure";
-            }
-        }, 1000);
-    </script>
+    <title>cslckrwbcl</title>
 </head>
 <body>
-    <p class="time"></p>
-    <form action="/" method="post" onsubmit="event.preventDefault(); verifyPassword();">
-        <input type="password" id="password" name="password" placeholder="Enter password" required autofocus>
-        <input type="submit" value="Submit">
-    </form>
+    <div class='container'>
+        <img src="resources/favicon.ico" alt="favicon" class="favicon">
+        <p class="time">00</p>
+        <form onsubmit="event.preventDefault(); verifyPassword();">
+            <input class="password-input" type="password" id="password" name="password" placeholder="Enter password" required autofocus>
+            <input class="submit-btn" type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script src="resources/script.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 body {
-    background-color: #121212;
+    background-color: #0f0f0f;
     display: flex;
+    color: white;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -8,60 +9,55 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-.flash {
-    width: 100vw;
-    height: 100vh;
-    background-color: #ffffff;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+.favicon {
+    width: 64px;
+    height: 64px;
 }
 
 .time {
-    position: absolute;
-    top: 30px;
-    font-size: 26px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
+    font-size: 24px;
+    margin: 0;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #1f1f1f;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
 }
 
-input[type="password"] {
-    border: none;
-    border-bottom: 2px solid #cc6300;
-    background: transparent;
-    color: #ffffff;
-    text-align: center;
-    font-size: 1.2em;
-    margin-bottom: 30px;
+.password-input, .submit-btn {
     padding: 10px;
+    font-size: 16px;
 }
 
-input[type="submit"] {
-    background: #cc7400;
-    color: #ffffff;
+.submit-btn {
+    background-color: #c25802;
+    color: white;
     border: none;
-    padding: 15px 30px;
-    font-size: 1.2em;
-    cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
-    background-color: #ac6100;
+.submit-btn {
+    cursor: pointer;
 }
 
-input[type="password"]:focus {
+.submit-btn:hover {
+    background-color: #c2580280;
+}
+
+.password-input:focus {
     outline: none;
-    border-bottom: 2px solid #cc7400;
+    border-bottom: 2px solid #c25802;
 }
 
 ::placeholder {
@@ -83,10 +79,16 @@ input[type="password"]:focus {
     left: 47.4%;
     border: 8px solid transparent;
     border-radius: 50%;
-    border-top: 8px solid #cc7400;
+    border-top: 8px solid #c25802;
     width: 70px;
     height: 70px;
     animation: spin 1.2s linear infinite;
+}
+
+.flash {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
 }
 
 @keyframes spin {
