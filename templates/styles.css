@@ -86,9 +86,12 @@ form {
 }
 
 .flash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-33%, -50%);
     width: 100vw;
     height: 100vh;
-    background-color: #ffffff;
 }
 
 @keyframes spin {

@@ -46,9 +46,9 @@ def remove_computer(computer_name):
 def home():
     return send_file('templates/index.html')
     
-@app.route('/flash')
+@app.route('/jumpscare')
 def flash_page():
-    return send_file('templates/flash.html')
+    return send_file('templates/jumpscare.html')
 
 @app.route('/neutral')
 def neutral_page():

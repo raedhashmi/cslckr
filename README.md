@@ -59,6 +59,18 @@ This server is absoluley required to be running when cslckrwbcl or cslckrmngr is
     .then(data => console.log(data))
 ```
 
+## Contributing
+
+Contributions are welcome for educational improvements or feature enhancements.
+1. Fork the repository.
+2. Create a new feature branch.
+3. Submit a pull request with a detailed description of changes.
+4. For major changes, please open an issue first to discuss your ideas.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org). You are free to use, modify, and distribute the software, provided the original copyright and permission notice are included
+
 ### Disclaimer
 
 I will not be held responsible for any damages caused by the cslckr malware family if it is installed on computers without the user's consent.
